@@ -6,6 +6,9 @@ from typing import Optional, List
 from groq import Groq
 import instructor
 from dotenv import load_dotenv
+from fastapi.middleware.cors import CORSMiddleware
+
+
 
 load_dotenv()
 
@@ -35,6 +38,15 @@ class ExtractionFacture(BaseModel):
 client = instructor.from_groq(
     Groq(api_key=os.getenv("GROQ_API_KEY")),
     mode=instructor.Mode.JSON
+)
+
+# Ajoute ceci juste après la création de l'app
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"], # Autorise toutes les origines pour le MVP
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
 @app.post("/extract")
