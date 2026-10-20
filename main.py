@@ -72,7 +72,7 @@ async def extract_invoice(request: ImageRequest, background_tasks: BackgroundTas
 
         # Extraction IA
         extraction = client.chat.completions.create(
-            model="qwen/qwen3-8b",
+            model="qwen/qwen3.8-27b",
             response_model=ExtractionFacture,
             messages=[
                 {
